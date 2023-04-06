@@ -7,6 +7,13 @@
 
 (evil-mode 1)
 (setq evil-want-Y-yank-to-eol t)
+(evil-set-leader 'normal (kbd "SPC"))
+
+(add-hook 'org-mode-hook
+  (evil-define-key 'normal org-mode-map
+    (kbd "<leader>ol") #'org-store-link
+    (kbd "<leader>oa") #'org-agenda
+    (kbd "<leader>oc") #'org-capture))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here
