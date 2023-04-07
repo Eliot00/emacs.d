@@ -6,7 +6,14 @@
 ;;; Code:
 
 (load-theme 'solo-jazz t)
-(add-hook 'after-init-hook #'doom-modeline-mode)
+(use-package doom-modeline
+  :ensure nil
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-irc nil)
+  (doom-modeline-mu4e nil)
+  (doom-modeline-unicode-fallback t)
+  (doom-modeline-enable-word-count t))
 
 (provide 'init-ui)
 

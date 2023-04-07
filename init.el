@@ -25,6 +25,7 @@
 (require 'init-base)
 (require 'init-ui)
 (require 'init-completion)
+(require 'init-git)
 (require 'init-roam)
 (require 'init-evil)
 
