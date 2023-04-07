@@ -40,7 +40,7 @@ folder, otherwise delete a word"
   (setq completion-styles '(orderless partial-completion basic))
   (setq orderless-component-separator "[ &]") ; & is for company because space will break completion
   (setq completion-category-defaults nil)
-  (setq completion-category-overrides nil))
+  (setq completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package marginalia
   :ensure nil
