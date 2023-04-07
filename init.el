@@ -13,13 +13,19 @@
 (setq package-archives nil)
 
 (setq package-enable-at-startup nil)
-(package-initialize)
+(package-initialize 'noactivate)
+(eval-when-compile
+  (require 'use-package))
 
 (global-company-mode)
 (add-hook 'company-mode-hook 'company-box-mode)
 
+(global-flycheck-mode)
+
 (require 'init-base)
 (require 'init-ui)
+(require 'init-completion)
+(require 'init-roam)
 (require 'init-evil)
 
 (provide 'init)

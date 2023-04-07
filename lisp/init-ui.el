@@ -6,6 +6,7 @@
 ;;; Code:
 
 (load-theme 'solo-jazz t)
+(add-hook 'after-init-hook #'doom-modeline-mode)
 
 (provide 'init-ui)
 
