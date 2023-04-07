@@ -13,7 +13,7 @@
 (add-hook 'org-mode-hook
   (lambda ()
     (evil-define-key 'normal org-mode-map
-      (kbd "<leader>oi") 'org-roam-note-insert
+      (kbd "<leader>oi") 'org-roam-node-insert
       (kbd "<leader>ol") 'org-store-link
       (kbd "<leader>oa") 'org-agenda
       (kbd "<leader>oc") 'org-capture)))
