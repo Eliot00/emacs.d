@@ -16,6 +16,7 @@
   (lambda ()
     (evil-define-key 'normal org-mode-map
       (kbd "<leader>i") 'org-roam-node-insert
+      (kbd "<return>") 'org-open-at-point
       (kbd "<leader>ol") 'org-store-link
       (kbd "<leader>oa") 'org-agenda
       (kbd "<leader>oc") 'org-capture)))
