@@ -10,10 +10,12 @@
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-global-set-key 'normal (kbd "<leader>f") 'find-file)
 
+(evil-define-key* 'normal 'global (kbd "<leader>od") 'org-roam-dailies-goto-today)
+
 (add-hook 'org-mode-hook
   (lambda ()
     (evil-define-key 'normal org-mode-map
-      (kbd "<leader>oi") 'org-roam-node-insert
+      (kbd "<leader>i") 'org-roam-node-insert
       (kbd "<leader>ol") 'org-store-link
       (kbd "<leader>oa") 'org-agenda
       (kbd "<leader>oc") 'org-capture)))
