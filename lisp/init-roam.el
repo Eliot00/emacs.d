@@ -171,20 +171,6 @@ Optional for Org-mode file: `LINK'."
   (org-todo-keyword-faces '(("TODO"       :foreground "#7c7c75" :weight bold)
 							("DOING"        :foreground "#0098dd" :weight bold)
 							("DONE"       :foreground "#50a14f" :weight bold)))
-  ;; 当标题行状态变化时标签同步发生的变化
-  ;; Moving a task to CANCELLED adds a CANCELLED tag
-  ;; Moving a task to WAIT adds a WAIT tag
-  ;; Moving a task to HOLD adds WAIT and HOLD tags
-  ;; Moving a task to a done state removes WAIT and HOLD tags
-  ;; Moving a task to TODO removes WAIT, CANCELLED, and HOLD tags
-  ;; Moving a task to DONE removes WAIT, CANCELLED, and HOLD tags
-  (org-todo-state-tags-triggers
-   (quote (("CANCELLED" ("CANCELLED" . t))
-		   ("WAIT" ("WAIT" . t))
-		   ("HOLD" ("WAIT") ("HOLD" . t))
-		   (done ("WAIT") ("HOLD"))
-		   ("TODO" ("WAIT") ("CANCELLED") ("HOLD"))
-		   ("DONE" ("WAIT") ("CANCELLED") ("HOLD")))))
   ;; 使用专家模式选择标题栏状态
   (org-use-fast-todo-selection 'expert)
   ;; 父子标题栏状态有依赖
