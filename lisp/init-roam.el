@@ -166,19 +166,11 @@ Optional for Org-mode file: `LINK'."
   (org-yank-adjusted-subtrees t)
 
   ;; TOOD的关键词设置，可以设置不同的组
-  (org-todo-keywords '((sequence "TODO(t)" "HOLD(h!)" "WIP(i!)" "WAIT(w!)" "|" "DONE(d!)" "CANCELLED(c@/!)")
-					   (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f!)")))
+  (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "|" "DONE(d!)")))
   ;; TODO关键词的样式设置
   (org-todo-keyword-faces '(("TODO"       :foreground "#7c7c75" :weight bold)
-							("HOLD"       :foreground "#feb24c" :weight bold)
-							("WIP"        :foreground "#0098dd" :weight bold)
-							("WAIT"       :foreground "#9f7efe" :weight bold)
-							("DONE"       :foreground "#50a14f" :weight bold)
-							("CANCELLED"  :foreground "#ff6480" :weight bold)
-							("REPORT"     :foreground "magenta" :weight bold)
-							("BUG"        :foreground "red"     :weight bold)
-							("KNOWNCAUSE" :foreground "yellow"  :weight bold)
-							("FIXED"      :foreground "green"   :weight bold)))
+							("DOING"        :foreground "#0098dd" :weight bold)
+							("DONE"       :foreground "#50a14f" :weight bold)))
   ;; 当标题行状态变化时标签同步发生的变化
   ;; Moving a task to CANCELLED adds a CANCELLED tag
   ;; Moving a task to WAIT adds a WAIT tag
