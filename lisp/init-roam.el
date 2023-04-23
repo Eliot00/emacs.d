@@ -515,5 +515,76 @@ Optional for Org-mode file: `LINK'."
 (setq org-roam-directory (file-truename "/Volumes/Extra/Data/PrivateNotes"))
 (org-roam-db-autosync-mode)
 
+;; 显示时间线
+(setq org-agenda-use-time-grid t)
+;; 设置面包屑分隔符
+;; (setq org-agenda-breadcrumbs-separator " ❱ ")
+;; 设置时间线的当前时间指示串
+(setq org-agenda-current-time-string "⏰------------now")
+;; 时间线范围和颗粒度设置
+(setq org-agenda-time-grid (quote ((daily today)
+				    (0600 0800 1000 1200
+					1400 1600 1800
+					2000 2200 2400)
+				    "......" "----------------")))
+(setq org-agenda-files '("/Volumes/Extra/Data/PrivateNotes"))
+;; 对于计划中的任务在视图里的显示
+(setq org-agenda-scheduled-leaders
+    '("计划 " "应在%02d天前开始 "))
+;; 对于截止日期的任务在视图里的显示
+(setq org-agenda-deadline-leaders
+    '("截止 " "还有%02d天到期 " "已经过期%02d天 "))
+
+(setq org-agenda-prefix-format
+      '((agenda . " %i %(vulpea-agenda-category 12)%?-12t% s")
+        (todo . " %i %(vulpea-agenda-category 12) ")
+        (tags . " %i %(vulpea-agenda-category 12) ")
+        (search . " %i %(vulpea-agenda-category 12) ")))
+
+(defun vulpea-agenda-category (&optional len)
+  "Get category of item at point for agenda.
+
+Category is defined by one of the following items:
+
+- CATEGORY property
+- TITLE keyword
+- TITLE property
+- filename without directory and extension
+
+When LEN is a number, resulting string is padded right with
+spaces and then truncated with ... on the right if result is
+longer than LEN.
+
+Usage example:
+
+  (setq org-agenda-prefix-format
+        '((agenda . \" %(vulpea-agenda-category) %?-12t %12s\")))
+
+Refer to `org-agenda-prefix-format' for more information."
+  (let* ((file-name (when buffer-file-name
+                      (file-name-sans-extension
+                       (file-name-nondirectory buffer-file-name))))
+         (title (vulpea-buffer-prop-get "title"))
+         (category (org-get-category))
+         (result
+          (or (if (and
+                   title
+                   (string-equal category file-name))
+                  title
+                category)
+              "")))
+    (if (numberp len)
+        (s-truncate len (s-pad-right len " " result))
+      result)))
+
+(defun vulpea-buffer-prop-get (name)
+  "Get a buffer property called NAME as a string."
+  (org-with-point-at 1
+    (when (re-search-forward (concat "^#\\+" name ": \\(.*\\)")
+                             (point-max) t)
+      (buffer-substring-no-properties
+       (match-beginning 1)
+       (match-end 1)))))
+
 (provide 'init-roam)
 ;;; init-roam.el ends here
