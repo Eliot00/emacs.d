@@ -34,20 +34,6 @@
       (ef-themes-load-random)
     (ef-themes-load-random 'dark))
 
-  :config
-  ;; auto change theme, aligning with system themes.
-  (defun my/apply-theme (appearance)
-    "Load theme, taking current system APPEARANCE into consideration."
-    (mapc #'disable-theme custom-enabled-themes)
-    (pcase appearance
-      ('light (if (display-graphic-p) (ef-themes-load-random 'light) (ef-themes-load-random 'dark)))
-      ('dark (ef-themes-load-random 'dark))))
-
-  (if (eq system-type 'darwin)
-      ;; only for emacs-plus
-      (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
-    (ef-themes-select 'ef-summer)
-    )
   )
 
 (use-package doom-modeline
