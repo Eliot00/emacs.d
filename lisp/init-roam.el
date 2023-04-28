@@ -512,7 +512,8 @@ Optional for Org-mode file: `LINK'."
     (exec-path-from-shell-copy-env "PYTHONPATH"))
   )
 
-(setq org-roam-directory (file-truename "/Volumes/Extra/Data/PrivateNotes"))
+(setq org-roam-directory
+      (file-truename (or (getenv "MY_ORG_NOTE_DIR") "~/Documents/Notes")))
 (org-roam-db-autosync-mode)
 
 ;; 显示时间线
