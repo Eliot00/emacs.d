@@ -516,6 +516,8 @@ Optional for Org-mode file: `LINK'."
       (file-truename (or (getenv "MY_ORG_NOTE_DIR") "~/Documents/Notes")))
 (org-roam-db-autosync-mode)
 
+(setq org-agenda-files (list org-roam-directory))
+
 ;; 显示时间线
 (setq org-agenda-use-time-grid t)
 ;; 设置面包屑分隔符
@@ -528,7 +530,6 @@ Optional for Org-mode file: `LINK'."
 					1400 1600 1800
 					2000 2200 2400)
 				    "......" "----------------")))
-(setq org-agenda-files '("/Volumes/Extra/Data/PrivateNotes"))
 ;; 对于计划中的任务在视图里的显示
 (setq org-agenda-scheduled-leaders
     '("计划 " "应在%02d天前开始 "))
