@@ -588,5 +588,18 @@ Refer to `org-agenda-prefix-format' for more information."
        (match-beginning 1)
        (match-end 1)))))
 
+(use-package org-habit
+  :ensure nil
+  :defer t
+  :custom
+  (org-habit-show-habits t)
+  (org-habit-graph-column 70)
+  (org-habit-show-all-today t)
+  (org-habit-show-done-always-green t)
+  (org-habit-scheduled-past-days t)
+  ;; org habit show 7 days before today and 7 days after today. ! means not done. * means done.
+  (org-habit-preceding-days 7)
+  )
+
 (provide 'init-roam)
 ;;; init-roam.el ends here
