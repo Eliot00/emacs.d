@@ -28,6 +28,7 @@
 (require 'init-git)
 (require 'init-roam)
 (require 'init-evil)
+(require 'init-rust)
 
 (provide 'init)
 ;;; init.el ends here
