@@ -513,7 +513,7 @@ Optional for Org-mode file: `LINK'."
   )
 
 (setq org-roam-directory
-      (file-truename (or (getenv "MY_ORG_NOTE_DIR") "~/Documents/Notes")))
+      (file-truename "~/Documents/Notes"))
 (org-roam-db-autosync-mode)
 
 (setq org-agenda-files (list org-roam-directory))
