@@ -41,8 +41,6 @@
 (set-face-attribute 'default nil :height 160 :font "Cascadia Code")
 (set-fontset-font "fontset-default" 'han "LXGW WenKai")
 
-(setq display-line-numbers-type 'relative)   ; （可选）显示相对行号
-
 ;; 将列表加入到列表的函数
 (defun add-list-to-list (dst src)
   "Similar to `add-to-list', but accepts a list as 2nd argument"
