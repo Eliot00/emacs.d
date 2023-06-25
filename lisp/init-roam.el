@@ -512,9 +512,18 @@ Optional for Org-mode file: `LINK'."
     (exec-path-from-shell-copy-env "PYTHONPATH"))
   )
 
-(setq org-roam-directory
-      (file-truename "~/Documents/Notes"))
-(org-roam-db-autosync-mode)
+(use-package org-roam
+  :ensure nil
+  :custom
+  (org-roam-directory
+    (file-truename "~/Documents/Notes"))
+  (org-roam-mode-sections
+    (list #'org-roam-backlinks-section
+          #'org-roam-reflinks-section
+    ))
+  :config
+  (org-roam-db-autosync-mode)
+)
 
 (setq org-agenda-files (list org-roam-directory))
 
