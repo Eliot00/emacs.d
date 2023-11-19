@@ -525,6 +525,7 @@ Optional for Org-mode file: `LINK'."
   (org-roam-db-autosync-mode)
 )
 
+(setq org-roam-completion-everywhere t)
 (setq org-agenda-files (list org-roam-directory))
 
 ;; 显示时间线

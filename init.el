@@ -17,8 +17,7 @@
 (eval-when-compile
   (require 'use-package))
 
-(global-company-mode)
-(add-hook 'company-mode-hook 'company-box-mode)
+(add-hook 'after-init-hook 'global-company-mode)
 
 (global-flycheck-mode)
 
