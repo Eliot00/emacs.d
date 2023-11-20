@@ -46,13 +46,23 @@ folder, otherwise delete a word"
   (vertico-count 15)                    ; number of candidates to display, default is 10
   )
 
+(use-package pinyinlib
+  :ensure nil)
+
 (use-package orderless
   :ensure nil
   :init
   (setq completion-styles '(orderless partial-completion basic))
   (setq orderless-component-separator "[ &]") ; & is for company because space will break completion
   (setq completion-category-defaults nil)
-  (setq completion-category-overrides '((file (styles partial-completion)))))
+  (setq completion-category-overrides nil)
+   :config
+  ;; make completion support pinyin, refer to
+  ;; https://emacs-china.org/t/vertico/17913/2
+  (defun completion--regex-pinyin (str)
+    (orderless-regexp (pinyinlib-build-regexp-string str)))
+  (add-to-list 'orderless-matching-styles 'completion--regex-pinyin)
+  )
 
 (use-package marginalia
   :ensure nil
@@ -137,6 +147,83 @@ folder, otherwise delete a word"
     "Consult line the synbol where the point is"
     (interactive)
     (consult-line (thing-at-point 'symbol)))
+  )
+
+(use-package corfu
+  :ensure nil
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-preselect 'prompt)
+  :bind
+  (:map corfu-map
+        ("SPC" . corfu-insert-separator)    ; configure space for separator insertion
+        ("M-q" . corfu-quick-complete)      ; use C-g to exit
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous))
+  :config
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete)
+
+  ;; (defun corfu-enable-always-in-minibuffer ()
+  ;;   "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+  ;;   (unless (or (bound-and-true-p mct--active)
+  ;;               (bound-and-true-p vertico--input)
+  ;; 		(eq (current-local-map) read-passwd-map))
+  ;;     ;; (setq-local corfu-auto nil) Enable/disable auto completion
+  ;;     (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+  ;; 		  corfu-popupinfo-delay nil)
+  ;;     (corfu-mode 1)))
+  ;; (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+
+  ;; enable corfu in eshell
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (setq-local corfu-auto nil)
+              (corfu-mode)))
+
+  ;; For Eshell
+  ;; ===========
+  ;; avoid press RET twice in Eshell
+  (defun corfu-send-shell (&rest _)
+    "Send completion candidate when inside comint/eshell."
+    (cond
+     ((and (derived-mode-p 'eshell-mode) (fboundp 'eshell-send-input))
+      (eshell-send-input))
+     ((and (derived-mode-p 'comint-mode)  (fboundp 'comint-send-input))
+      (comint-send-input))))
+
+  (advice-add #'corfu-insert :after #'corfu-send-shell)
+
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  )
+
+(use-package cape
+  :ensure t
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)  ; programming language keyword
+  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (add-to-list 'completion-at-point-functions #'cape-dict)
+  (add-to-list 'completion-at-point-functions #'cape-symbol)   ; elisp symbol
+  (add-to-list 'completion-at-point-functions #'cape-line)
+
+  ;; for Eshell:
+  ;; ===========
+  ;; Silence the pcomplete capf, no errors or messages!
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+
+  ;; Ensure that pcomplete does not write to the buffer
+  ;; and behaves as a pure `completion-at-point-function'.
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify)
   )
 
 (provide 'init-completion)

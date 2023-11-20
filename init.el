@@ -17,8 +17,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(add-hook 'after-init-hook 'global-company-mode)
-
 (global-flycheck-mode)
 
 (require 'init-base)
