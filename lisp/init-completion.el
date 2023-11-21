@@ -167,7 +167,7 @@ folder, otherwise delete a word"
         ([backtab] . corfu-previous))
   :config
   ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
+  (setq completion-cycle-threshold 1)
   (setq tab-always-indent 'complete)
 
   ;; (defun corfu-enable-always-in-minibuffer ()
@@ -214,7 +214,6 @@ folder, otherwise delete a word"
   (add-to-list 'completion-at-point-functions #'cape-ispell)
   (add-to-list 'completion-at-point-functions #'cape-dict)
   (add-to-list 'completion-at-point-functions #'cape-symbol)   ; elisp symbol
-  (add-to-list 'completion-at-point-functions #'cape-line)
 
   ;; for Eshell:
   ;; ===========
