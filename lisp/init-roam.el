@@ -132,9 +132,9 @@ Optional for Org-mode file: `LINK'."
   ;; 当启用缩进模式时自动隐藏前置星号
   (org-indent-mode-turns-on-hiding-stars t)
   ;; 自动启用缩进
-  (org-startup-indented nil)
+  (org-startup-indented t)
   ;; 根据标题栏自动缩进文本
-  (org-adapt-indentation nil)
+  (org-adapt-indentation t)
   ;; 自动显示图片
   (org-startup-with-inline-images t)
   ;; 默认以Overview的模式展示标题行
