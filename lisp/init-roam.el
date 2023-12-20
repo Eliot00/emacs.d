@@ -525,8 +525,37 @@ Optional for Org-mode file: `LINK'."
   (org-roam-db-autosync-mode)
 )
 
-(setq org-roam-completion-everywhere t)
-(setq org-agenda-files (list org-roam-directory))
+(setq org-roam-complete-everywhere t)
+
+(defun my/find-linked-notes-by-title (title)
+  "Return a list of file paths of notes linked with TITLE in Org-roam v2."
+  (let ((linked-files '()))
+    ;; Find the ID of the node with the given title
+    (let ((project-node-id (caar (org-roam-db-query [:select [id]
+                                                     :from nodes
+                                                     :where (= title $s1)]
+                                                    title))))
+      ;; Query for files that link to the node with the found ID
+      (dolist (row (org-roam-db-query [:select [nodes:file]
+                                       :from links
+                                       :left-join nodes :on (= links:source nodes:id)
+                                       :where (= links:dest $s1)]
+                                      project-node-id))
+        (push (car row) linked-files)))
+    linked-files))
+
+(defun my/org-roam-refresh-agenda-list ()
+  "Refresh org-agenda-files with files linked to 'Projects' in Org-roam v2."
+  (interactive)
+  (let ((linked-files (my/find-linked-notes-by-title "Projects")))
+    (if linked-files
+        (progn
+          (setq org-agenda-files linked-files)
+          (message "Agenda files updated for 'Projects'."))
+      (message "No linked files found for 'Projects'."))))
+
+;; Build the agenda list the first time for the session
+(my/org-roam-refresh-agenda-list)
 
 ;; 显示时间线
 (setq org-agenda-use-time-grid t)
