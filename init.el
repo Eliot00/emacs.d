@@ -25,7 +25,7 @@
 (require 'init-git)
 (require 'init-roam)
 (require 'init-evil)
-(require 'init-rust)
+(require 'init-program)
 
 (provide 'init)
 ;;; init.el ends here
