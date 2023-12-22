@@ -53,7 +53,6 @@ folder, otherwise delete a word"
   :ensure nil
   :init
   (setq completion-styles '(orderless partial-completion basic))
-  (setq orderless-component-separator "[ &]") ; & is for company because space will break completion
   (setq completion-category-defaults nil)
   (setq completion-category-overrides nil)
    :config
