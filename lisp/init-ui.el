@@ -22,19 +22,7 @@
   ;; Disable all other themes to avoid awkward blending:
   (mapc #'disable-theme custom-enabled-themes)
 
-  ;; Load the theme of choice:
-  ;; The themes we provide are recorded in the `ef-themes-dark-themes',
-  ;; `ef-themes-light-themes'.
-
-  ;; 如果你不喜欢随机主题，也可以直接固定选择一个主题，如下：
-  ;; (ef-themes-select 'ef-summer)
-
-  ;; 随机挑选一款主题，如果是命令行打开Emacs，则随机挑选一款黑色主题
-  (if (display-graphic-p)
-      (ef-themes-load-random)
-    (ef-themes-load-random 'dark))
-
-  )
+  (ef-themes-select 'ef-spring))
 
 (use-package doom-modeline
   :ensure nil
