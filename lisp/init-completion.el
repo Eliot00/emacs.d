@@ -197,11 +197,7 @@ folder, otherwise delete a word"
      ((and (derived-mode-p 'comint-mode)  (fboundp 'comint-send-input))
       (comint-send-input))))
 
-  (advice-add #'corfu-insert :after #'corfu-send-shell)
-
-  :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  )
+  (advice-add #'corfu-insert :after #'corfu-send-shell))
 
 (use-package cape
   :ensure nil

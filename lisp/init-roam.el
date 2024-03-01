@@ -438,7 +438,7 @@ Optional for Org-mode file: `LINK'."
                         ("bash"         . sh)
                         ("cpp"          . c++)
                         ("elisp"        . emacs-lisp)
-                        ("python"       . python)
+                        ("python"       . python-ts)
                         ("shell"        . sh)
                         ("mysql"        . sql)
                         ))
@@ -465,10 +465,9 @@ Optional for Org-mode file: `LINK'."
           #'org-roam-reflinks-section
     ))
   :config
-  (org-roam-db-autosync-mode)
-)
+  (org-roam-db-autosync-mode))
 
-(setq org-roam-complete-everywhere t)
+(setq org-roam-completion-everywhere t)
 
 (defun my/find-linked-notes-by-title (title)
   "Return a list of file paths of notes linked with TITLE in Org-roam v2."
