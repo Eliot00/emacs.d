@@ -155,10 +155,11 @@ folder, otherwise delete a word"
   :custom
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-quit-no-match t)
+  (corfu-separator ?\s)
   (corfu-preselect 'prompt)
   :bind
   (:map corfu-map
-        ("SPC" . corfu-insert-separator)    ; configure space for separator insertion
         ("M-q" . corfu-quick-complete)      ; use C-g to exit
         ("TAB" . corfu-next)
         ([tab] . corfu-next)
@@ -208,7 +209,7 @@ folder, otherwise delete a word"
   (add-to-list 'completion-at-point-functions #'cape-keyword)  ; programming language keyword
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
-  (add-to-list 'completion-at-point-functions #'cape-symbol)   ; elisp symbol
+  ;; (add-to-list 'completion-at-point-functions #'cape-symbol)   ; elisp symbol
 
   ;; for Eshell:
   ;; ===========
