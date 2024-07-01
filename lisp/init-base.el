@@ -24,8 +24,9 @@
 (when (display-graphic-p) (toggle-scroll-bar -1)) ; 图形界面时关闭滚动条
 (icomplete-mode 1)
 
-(set-face-attribute 'default nil :height 160 :font "Cascadia Code")
-(set-fontset-font "fontset-default" 'han "LXGW WenKai")
+(set-face-attribute 'default nil :height 160 :font "LXGW WenKai Mono")
+; (set-face-attribute 'default nil :height 160 :font "FiraCode Nerd Font Mono")
+; (set-fontset-font "fontset-default" 'han "LXGW WenKai Mono")
 
 ;; 将列表加入到列表的函数
 (defun add-list-to-list (dst src)

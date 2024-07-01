@@ -28,7 +28,7 @@
   :ensure nil
   :hook (after-init . doom-modeline-mode)
   :init
-  (setq nerd-icons-font-family "CaskaydiaCove NFM")
+  (setq nerd-icons-font-family "FiraCode Nerd Font Mono")
   :custom
   (doom-modeline-irc nil)
   (doom-modeline-mu4e nil)

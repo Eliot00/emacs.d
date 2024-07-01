@@ -2,7 +2,12 @@ org-roam.db
 bookmarks
 .org-id-locations
 history
+/eln-cache
+/elpa
+/tree-sitter
 
 
 transient/
 /auto-save-list/
+
+.DS_Store
