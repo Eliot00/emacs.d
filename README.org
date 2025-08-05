@@ -1,0 +1,320 @@
+#+TITLE: Emacs配置文件
+
+#+STARTUP: overview
+
+* early-init.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle early-init.el
+:END:
+
+在Emacs剛啓動，還未加載主要配置文件時的配置文件。
+
+#+BEGIN_SRC emacs-lisp
+;;; early-init.el --- Emacs pre-initialization config -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+;; 設置垃圾回收參數
+(setq gc-cons-threshold most-positive-fixnum)
+
+;; 啓動早期不加載`package.el'包管理器
+(setq package-enable-at-startup nil)
+;; 不从包缓存中加载
+(setq package-quickstart nil)
+
+;; 禁用菜單欄、工具欄、滾動條
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
+
+;; 禁止自動縮放窗口
+(setq frame-inhibit-implied-resize t)
+
+;; 禁止啓動屏幕和對話框
+(setq inhibit-splash-screen t)
+(setq use-file-dialog nil)
+
+;; macOS按鍵配置
+(setq mac-command-modifier 'meta)
+
+;; 在這個階段不編譯
+(setq comp-deferred-compilation nil)
+
+(provide 'early-init)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; early-init.el ends here
+#+END_SRC
+
+* init.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle init.el
+:END:
+
+主配置文件
+
+** init.el 文件頭
+#+BEGIN_SRC emacs-lisp
+;;; init.el --- The main init entry for Emacs -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** 性能相關
+#+BEGIN_SRC emacs-lisp
+;; 禁用Magic File Name
+(defconst my-saved-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+#+END_SRC
+
+** package包管理配置
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq package-archives
+      '(("melpa"  . "https://melpa.org/packages/")
+        ("gnu"    . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+
+(package-initialize)
+#+END_SRC
+
+** 安裝[[https://github.com/jwiegley/use-package][use-package]]插件
+
+#+begin_src emacs-lisp
+;; 安裝 `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; 配置 `use-package'
+(eval-and-compile
+  (setq use-package-always-ensure nil)
+  (setq use-package-always-defer nil)
+  (setq use-package-expand-minimally nil)
+  (setq use-package-enable-imenu-support t)
+  (if (daemonp)
+      (setq use-package-always-demand t)))
+
+(eval-when-compile
+  (require 'use-package))
+
+;; 安裝 `use-package' 的集成模塊
+(use-package diminish
+  :ensure t)
+(use-package bind-key
+  :ensure t)
+#+end_src
+
+** 加載模塊化配置
+
+#+BEGIN_SRC emacs-lisp
+;; 將lisp目錄放到加載路徑前以加快啓動速度
+(let ((dir (locate-user-emacs-file "lisp")))
+  (add-to-list 'load-path (file-name-as-directory dir)))
+
+;; 加載各模塊配置
+;; 不要在`*message*'緩衝區顯示加載模塊化配置的信息
+(with-temp-message ""
+  (require 'init-ui)
+  )
+#+END_SRC
+
+** 性能相關 - 重置
+參考[[https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/dcebc13578d42055f8a4][Emacs の起動時間を""詰める""]]
+
+#+BEGIN_SRC emacs-lisp
+;; 重置Magic File Name
+(setq file-name-handler-alist my-saved-file-name-handler-alist)
+
+;; 重置GC設置 16M
+(setq gc-cons-threshold 16777216)
+#+END_SRC
+
+
+** init.el 文件尾
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init.el ends here
+#+END_SRC
+
+* init-ui.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-ui.el :mkdirp yes
+:END:
+
+** init-ui.el 文件頭
+#+BEGIN_SRC emacs-lisp
+;;; init-ui.el --- UI settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** ef主題
+#+BEGIN_SRC emacs-lisp
+(use-package ef-themes
+  :ensure t
+  :init
+  ;; set two specific themes and switch between them
+  (setq ef-themes-to-toggle '(ef-summer ef-winter))
+
+  (setq ef-themes-headings
+    '((0 . (bold 1))
+      (1 . (bold 1))
+      (2 . (rainbow bold 1))
+      (3 . (rainbow bold 1))
+      (4 . (rainbow bold 1))
+      (t . (rainbow bold 1))))
+
+  (setq ef-themes-region '(intense no-extend neutral))
+  ;; Disable all other themes to avoid awkward blending:
+  (mapc #'disable-theme custom-enabled-themes)
+
+  (ef-themes-select 'ef-spring))
+#+END_SRC
+
+** 字體
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :font (font-spec :family "Maple Mono NF" :size 18))
+(set-fontset-font t '(#x2ff0 . #x9ffc) (font-spec :family "LXGW WenKai TC" :size 18))
+#+END_SRC
+
+** 零散設置
+#+BEGIN_SRC emacs-lisp
+;; 禁用一行GUI特性
+(setq use-dialog-box nil)
+(setq inhibit-default-init t)
+(setq inhibit-startup-screen t)
+(setq inhibit-startup-message t)
+(setq inhibit-startup-buffer-menu t)
+
+;; 設置自動折行寬度爲80字符
+(setq-default fill-column 80)
+
+;; 以16進制顯示字節數
+(setq display-raw-bytes-as-hex t)
+
+;; 有輸入時禁止 `fontification' 相關鉤子，使滾動更順滑
+(setq redisplay-skip-fontification-on-input t)
+
+;; 在光標處而非鼠標所在位置粘貼
+(setq mouse-yank-at-point t)
+
+;; 禁止自動垂直滾動
+(setq auto-window-vscroll nil)
+
+;; 空格代替Tab
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+#+END_SRC
+
+** 編碼設置
+#+BEGIN_SRC emacs-lisp
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-language-environment 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(modify-coding-system-alist 'process "*" 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+END_SRC
+
+** Modeline
+#+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-irc nil)
+  (doom-modeline-mu4e nil)
+  (doom-modeline-gnus nil)
+  (doom-modeline-github nil))
+#+END_SRC
+
+** init-ui.el 文件尾
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-ui)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-ui.el ends here
+#+END_SRC
+
+* init-edit.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-edit.el :mkdirp yes
+:END:
+
+** init-edit.el 文件頭
+
+#+BEGIN_SRC emacs-lisp
+;;; init-edit.el --- Editing settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** Emacs備份設置
+
+不使用Emacs的自動備份設置。
+
+#+BEGIN_SRC emacs-lisp
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+#+END_SRC
+
+** init-edit.el 文件尾
+
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-edit)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-edit.el ends here
+#+END_SRC
+
+* init-org.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-org.el :mkdirp yes
+:END:
+
+** init-org.el 文件頭
+
+#+BEGIN_SRC emacs-lisp
+;;; init-org.el --- Org mode settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** 自動tangle
+
+[[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]]
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-auto-tangle
+  :ensure t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
+#+END_SRC
+
+** init-org.el 文件尾
+
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-org)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-org.el ends here
+#+END_SRC

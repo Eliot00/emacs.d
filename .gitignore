@@ -11,3 +11,11 @@ transient/
 /auto-save-list/
 
 .DS_Store
+
+recentf
+projects
+/lisp
+init.el
+early-init.el
+/eshell
+/.cache
