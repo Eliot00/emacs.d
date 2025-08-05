@@ -118,7 +118,9 @@
 ;; 不要在`*message*'緩衝區顯示加載模塊化配置的信息
 (with-temp-message ""
   (require 'init-ui)
-  )
+  (require 'init-edit)
+  (require 'init-org)
+  (require 'init-completion))
 #+END_SRC
 
 ** 性能相關 - 重置
@@ -160,7 +162,7 @@
 (use-package modus-themes
   :ensure t
   :config
-  (load-theme 'modus-operandi-tinted))
+  (modus-themes-load-theme 'modus-operandi-tinted))
 #+END_SRC
 
 ** 字體
@@ -283,18 +285,6 @@
 
 #+END_SRC
 
-** 自動tangle
-
-[[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]]
-
-#+BEGIN_SRC emacs-lisp
-(use-package org-auto-tangle
-  :ensure t
-  :hook (org-mode . org-auto-tangle-mode)
-  :config
-  (setq org-auto-tangle-default t))
-#+END_SRC
-
 ** init-org.el 文件尾
 
 #+BEGIN_SRC emacs-lisp
@@ -302,4 +292,66 @@
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
+#+END_SRC
+
+* init-completion.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-completion.el :mkdirp yes
+:END:
+
+補全設置
+
+** init-completion.el 文件頭
+#+BEGIN_SRC emacs-lisp
+;;; init-completion.el --- Completion settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** vertico
+#+BEGIN_SRC emacs-lisp
+(use-package vertico
+  :ensure t
+  :custom
+  (vertico-count 15)
+  (vertico-cycle t)
+  :init (vertico-mode))
+#+END_SRC
+
+** 無序補全
+#+BEGIN_SRC emacs-lisp
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+#+END_SRC
+
+** corfu
+#+BEGIN_SRC emacs-lisp
+(use-package corfu
+  :ensure t
+  :hook (after-init . global-corfu-mode)
+  :config
+  (setq tab-always-indent 'complete)
+  (setq text-mode-ispell-word-completion nil)
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous))
+  :custom
+  (corfu-auto t)
+  (corfu-cycle t))
+#+END_SRC
+
+** init-completion.el 文件尾
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-completion)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-completion.el ends here
 #+END_SRC
