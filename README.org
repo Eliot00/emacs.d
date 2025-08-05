@@ -28,6 +28,9 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 
+;; 沉浸式titlebar
+(push '(ns-transparent-titlebar . t) default-frame-alist)
+
 ;; 禁止自動縮放窗口
 (setq frame-inhibit-implied-resize t)
 
