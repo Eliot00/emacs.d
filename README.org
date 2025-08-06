@@ -337,6 +337,7 @@
   :ensure t
   :custom
   (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
   (completion-category-overrides '((file (styles basic partial-completion)))))
 #+END_SRC
 
@@ -356,7 +357,19 @@
         ([backtab] . corfu-previous))
   :custom
   (corfu-auto t)
+  (corfu-quit-no-match 'separator)
   (corfu-cycle t))
+#+END_SRC
+
+** cape
+補全後端配置
+#+BEGIN_SRC emacs-lisp
+(use-package cape
+  :ensure t
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 #+END_SRC
 
 ** init-completion.el 文件尾
