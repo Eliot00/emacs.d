@@ -387,6 +387,17 @@
   :ensure t)
 #+END_SRC
 
+** 側邊欄顯示改動狀態
+#+BEGIN_SRC emacs-lisp
+(use-package diff-hl
+  :ensure t
+  :hook ((dired-mode         . diff-hl-dired-mode-unless-remote)
+         (magit-pre-refresh  . diff-hl-magit-pre-refresh)
+         (magit-post-refresh . diff-hl-magit-post-refresh))
+  :init
+  (global-diff-hl-mode t))
+#+END_SRC
+
 ** init-dev.el 文件尾
 #+BEGIN_SRC emacs-lisp
 
