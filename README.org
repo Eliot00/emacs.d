@@ -221,6 +221,13 @@
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+END_SRC
 
+** Icon
+#+BEGIN_SRC emacs-lisp
+(use-package nerd-icons
+  :ensure t
+  :custom
+  (nerd-icons-font-family "Maple Mono NF"))
+#+END_SRC
 ** Modeline
 #+BEGIN_SRC emacs-lisp
 (use-package doom-modeline
