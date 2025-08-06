@@ -123,7 +123,8 @@
   (require 'init-ui)
   (require 'init-edit)
   (require 'init-org)
-  (require 'init-completion))
+  (require 'init-completion)
+  (require 'init-dev))
 #+END_SRC
 
 ** 性能相關 - 重置
@@ -357,4 +358,32 @@
 (provide 'init-completion)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-completion.el ends here
+#+END_SRC
+
+* init-dev.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-dev.el :mkdirp yes
+:END:
+
+** init-dev.el 文件頭
+#+BEGIN_SRC emacs-lisp
+;;; init-dev.el --- Development settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** magit
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t)
+#+END_SRC
+
+** init-dev.el 文件尾
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-dev)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-dev.el ends here
 #+END_SRC
