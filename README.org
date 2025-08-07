@@ -296,6 +296,57 @@
 
 #+END_SRC
 
+** Org mode基本配置
+
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :ensure nil
+  :mode ("\\.org\\'" . org-mode)
+  :commands (org-find-exact-headline-in-buffer org-set-tags)
+  :custom-face
+  (org-document-title ((t (:height 1.75 :weight bold))))
+  (org-level-1 ((t (:height 1.2 :weight bold))))
+  (org-level-2 ((t (:height 1.15 :weight bold))))
+  (org-level-3 ((t (:height 1.1 :weight bold))))
+  (org-level-4 ((t (:height 1.05 :weight bold))))
+  (org-level-5 ((t (:height 1.0 :weight bold))))
+  (org-level-6 ((t (:height 1.0 :weight bold))))
+  (org-level-7 ((t (:height 1.0 :weight bold))))
+  (org-level-8 ((t (:height 1.0 :weight bold))))
+  (org-level-9 ((t (:height 1.0 :weight bold)))))
+#+END_SRC
+
+** 自動展開
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-appear
+  :ensure t
+  :hook
+  (org-mode . org-appear-mode)
+  :custom
+  (org-appear-autolinks t)
+  (org-appear-autosubmarkers t)
+  (org-appear-autoentities t)
+  (org-appear-autokeywords t)
+  (org-appear-inside-latex t))
+#+END_SRC
+
+** 雙鏈筆記
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-roam
+  :ensure t
+  :defer t
+  :hook (org-mode . org-roam-db-autosync-mode)
+  :custom
+  (org-roam-directory
+    (file-truename "~/Documents/Notes"))
+  (org-roam-mode-sections
+    (list #'org-roam-backlinks-section
+          #'org-roam-reflinks-section
+    )))
+#+END_SRC
+
 ** init-org.el 文件尾
 
 #+BEGIN_SRC emacs-lisp
