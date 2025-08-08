@@ -406,20 +406,21 @@
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
   :commands (org-find-exact-headline-in-buffer org-set-tags)
-  :custom-face
-  (org-document-title ((t (:height 1.75 :weight bold))))
-  (org-level-1 ((t (:height 1.2 :weight bold))))
-  (org-level-2 ((t (:height 1.15 :weight bold))))
-  (org-level-3 ((t (:height 1.1 :weight bold))))
-  (org-level-4 ((t (:height 1.05 :weight bold))))
-  (org-level-5 ((t (:height 1.0 :weight bold))))
-  (org-level-6 ((t (:height 1.0 :weight bold))))
-  (org-level-7 ((t (:height 1.0 :weight bold))))
-  (org-level-8 ((t (:height 1.0 :weight bold))))
-  (org-level-9 ((t (:height 1.0 :weight bold))))
+  :config
+  (prettify-symbols-mode 1)
   :custom
+  (org-pretty-entities t)
   (org-ellipsis " ▾")
   (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "PENDING(p!)" "|" "DONE(d!)" "CANCELLED(c@/!)"))))
+#+END_SRC
+
+** 外觀美化
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-modern
+  :ensure t
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda)))
 #+END_SRC
 
 ** 自動展開
