@@ -272,6 +272,15 @@
 (setq auto-save-default nil)
 #+END_SRC
 
+** 自動重載
+其它應用修改文件後，Emacs自動重載文件
+
+#+BEGIN_SRC emacs-lisp
+(use-package autorevert
+  :ensure nil
+  :hook (after-init . global-auto-revert-mode))
+#+END_SRC
+
 ** init-edit.el 文件尾
 
 #+BEGIN_SRC emacs-lisp
