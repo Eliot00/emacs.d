@@ -169,6 +169,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package modus-themes
   :ensure t
+  :custom
+  (modus-themes-mixed-fonts t)
   :config
   (modus-themes-load-theme 'modus-operandi-tinted))
 #+END_SRC
@@ -424,7 +426,9 @@
 (use-package org-modern
   :ensure t
   :hook ((org-mode . org-modern-mode)
-         (org-agenda-finalize . org-modern-agenda)))
+         (org-agenda-finalize . org-modern-agenda))
+  :config
+  (setq-default line-spacing 0.1))
 #+END_SRC
 
 ** 自動展開
