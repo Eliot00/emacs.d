@@ -416,7 +416,10 @@
   (org-level-6 ((t (:height 1.0 :weight bold))))
   (org-level-7 ((t (:height 1.0 :weight bold))))
   (org-level-8 ((t (:height 1.0 :weight bold))))
-  (org-level-9 ((t (:height 1.0 :weight bold)))))
+  (org-level-9 ((t (:height 1.0 :weight bold))))
+  :custom
+  (org-ellipsis " ▾")
+  (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "PENDING(p!)" "|" "DONE(d!)" "CANCELLED(c@/!)"))))
 #+END_SRC
 
 ** 自動展開
@@ -437,17 +440,12 @@
 ** 雙鏈筆記
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-roam
+(use-package denote
   :ensure t
   :defer t
-  :hook (org-mode . org-roam-db-autosync-mode)
-  :custom
-  (org-roam-directory
-    (file-truename "~/Documents/Notes"))
-  (org-roam-mode-sections
-    (list #'org-roam-backlinks-section
-          #'org-roam-reflinks-section
-    )))
+  :hook (dired-mode . denote-dired-mode-in-directories)
+  :config
+  (setq denote-directory (file-truename "~/Documents/Notes")))
 #+END_SRC
 
 ** init-org.el 文件尾
