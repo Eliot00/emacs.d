@@ -171,6 +171,11 @@
   :ensure t
   :custom
   (modus-themes-mixed-fonts t)
+  (modus-themes-headings
+  '((0 . (bold 1.75))
+    (1 . (bold 1.2))
+    (2 . (bold 1.15))
+    (3 . (1.1))))
   :config
   (modus-themes-load-theme 'modus-operandi-tinted))
 #+END_SRC
@@ -412,19 +417,20 @@
 #+BEGIN_SRC emacs-lisp
 ;; 中文字體等寬字體設置
 (defun my/org-mono-font ()
-  (face-remap-add-relative 'fixed-pitch '(:family "LXGW WenKai Mono TC")))
+  (face-remap-add-relative 'fixed-pitch '(:family "LXGW WenKai Mono TC"))
+  (variable-pitch-mode))
 
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
-  :hook ((org-mode . my/org-mono-font)
-         (org-mode . variable-pitch-mode))
+  :hook ((org-mode . my/org-mono-font))
   :commands (org-find-exact-headline-in-buffer org-set-tags)
   :config
   (prettify-symbols-mode 1)
   :custom
+  (org-ellipsis "…")
+  (org-hide-emphasis-markers t)
   (org-pretty-entities t)
-  (org-ellipsis " ▾")
   (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "PENDING(p!)" "|" "DONE(d!)" "CANCELLED(c@/!)"))))
 #+END_SRC
 
@@ -440,7 +446,8 @@
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda))
   :config
-  (setq-default line-spacing 0.1))
+  (setq-default line-spacing 0.1)
+  (set-face-attribute 'org-modern-symbol nil :family "Maple Mono NF"))
 #+END_SRC
 
 ** 自動展開
