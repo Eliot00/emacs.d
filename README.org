@@ -432,6 +432,14 @@
   (org-ellipsis "…")
   (org-hide-emphasis-markers t)
   (org-pretty-entities t)
+  (org-enforce-todo-dependencies t)
+  (org-enforce-todo-checkbox-dependencies t)
+  (org-closed-keep-when-no-todo t)
+  (org-log-done 'time)
+  (org-log-repeat 'time)
+  (org-log-redeadline 'note)
+  (org-log-reschedule 'note)
+  (org-log-into-drawer t)
   (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "PENDING(p!)" "|" "DONE(d!)" "CANCELLED(c@/!)"))))
 #+END_SRC
 
