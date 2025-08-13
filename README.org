@@ -474,6 +474,14 @@
   (org-appear-inside-latex t))
 #+END_SRC
 
+** 模板
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-capture
+  :ensure nil
+  :commands org-capture)
+#+END_SRC
+
 ** 雙鏈筆記
 
 #+BEGIN_SRC emacs-lisp
@@ -481,6 +489,22 @@
   :ensure t
   :defer t
   :hook (dired-mode . denote-dired-mode-in-directories)
+  :init
+  (with-eval-after-load 'org-capture
+    (setq denote-org-capture-specifiers nil)
+    (add-to-list 'org-capture-templates
+                 '("d" "Diary (with Denote)" plain
+                    (file denote-last-path)
+                    (function
+                    (lambda ()
+                        (let* ((denote-use-keywords '("diary"))
+                               (denote-use-title (format-time-string "%Y-%m-%d"))
+                               (denote-use-directory (expand-file-name "journal" (denote-directory))))
+                        (denote-org-capture))))
+                    :no-save t
+                    :immediate-finish nil
+                    :kill-buffer t
+                    :jump-to-captured t)))
   :config
   (setq denote-directory (file-truename "~/Documents/Notes")))
 #+END_SRC
