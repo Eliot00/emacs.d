@@ -455,8 +455,7 @@
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda))
   :config
-  (setq-default line-spacing 0.1)
-  (set-face-attribute 'org-modern-symbol nil :family "Maple Mono NF"))
+  (setq-default line-spacing 0.1))
 #+END_SRC
 
 ** 自動展開
