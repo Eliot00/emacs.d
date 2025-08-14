@@ -489,13 +489,13 @@
   (with-eval-after-load 'org-capture
     (setq denote-org-capture-specifiers nil)
     (add-to-list 'org-capture-templates
-                 '("d" "Diary (with Denote)" plain
+                 '("j" "Journal (with Denote)" plain
                     (file denote-last-path)
                     (function
                     (lambda ()
                         (let* ((denote-use-keywords '("diary"))
                                (denote-use-title (format-time-string "%Y-%m-%d"))
-                               (denote-use-directory (expand-file-name "journal" (denote-directory))))
+                               (denote-use-directory (expand-file-name "journals" (denote-directory))))
                         (denote-org-capture))))
                     :no-save t
                     :immediate-finish nil
