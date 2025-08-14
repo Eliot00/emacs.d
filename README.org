@@ -18,11 +18,6 @@
 ;; 設置垃圾回收參數
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; 啓動早期不加載`package.el'包管理器
-(setq package-enable-at-startup nil)
-;; 不从包缓存中加载
-(setq package-quickstart nil)
-
 ;; 禁用菜單欄、工具欄、滾動條
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -41,12 +36,8 @@
 ;; macOS按鍵配置
 (setq mac-command-modifier 'meta)
 
-;; Copy from `Centaur Emacs'
-;; Prevent unwanted runtime compilation for gccemacs (native-comp) users;
-;; packages are compiled ahead-of-time when they are installed and site files
-;; are compiled when gccemacs is installed.
-(setq native-comp-deferred-compilation nil ;; obsolete since 29.1
-      native-comp-jit-compilation nil)
+;; 啓用 `quickstart'
+(setq package-quickstart t)
 
 (provide 'early-init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -70,7 +61,12 @@
 #+END_SRC
 
 ** 性能相關
+參考[[https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/dcebc13578d42055f8a4][Emacs の起動時間を""詰める""]]
+
 #+BEGIN_SRC emacs-lisp
+;; 設置垃圾回收參數
+(setq gc-cons-threshold most-positive-fixnum)
+
 ;; 禁用Magic File Name
 (defconst my-saved-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
@@ -83,8 +79,6 @@
       '(("melpa"  . "https://melpa.org/packages/")
         ("gnu"    . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-
-(package-initialize)
 #+END_SRC
 
 ** 安裝[[https://github.com/jwiegley/use-package][use-package]]插件
@@ -132,7 +126,6 @@
 #+END_SRC
 
 ** 性能相關 - 重置
-參考[[https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/dcebc13578d42055f8a4][Emacs の起動時間を""詰める""]]
 
 #+BEGIN_SRC emacs-lisp
 ;; 重置Magic File Name

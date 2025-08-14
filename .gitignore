@@ -19,3 +19,5 @@ init.el
 early-init.el
 /eshell
 /.cache
+package-quickstart.el
+package-quickstart.elc
