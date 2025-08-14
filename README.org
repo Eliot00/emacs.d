@@ -423,6 +423,9 @@
   (prettify-symbols-mode 1)
   :custom
   (org-ellipsis "…")
+  (org-fontify-whole-heading-line t)
+  (org-fontify-todo-headline t)
+  (org-fontify-done-headline t)
   (org-hide-emphasis-markers t)
   (org-pretty-entities t)
   (org-enforce-todo-dependencies t)
@@ -448,7 +451,8 @@
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda))
   :config
-  (setq-default line-spacing 0.1))
+  (setq-default line-spacing 0.1)
+  (set-face-attribute 'org-modern-symbol nil :family "Maple Mono NF"))
 #+END_SRC
 
 ** 自動展開
