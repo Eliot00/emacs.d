@@ -493,7 +493,7 @@
                     (file denote-last-path)
                     (function
                     (lambda ()
-                        (let* ((denote-use-keywords '("diary"))
+                        (let* ((denote-use-keywords '("journal"))
                                (denote-use-title (format-time-string "%Y-%m-%d"))
                                (denote-use-directory (expand-file-name "journals" (denote-directory))))
                         (denote-org-capture))))
