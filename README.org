@@ -400,6 +400,12 @@
 
 #+END_SRC
 
+** 常量
+
+#+BEGIN_SRC emacs-lisp
+(defconst elliot/org-notes-dir (expand-file-name "~/Documents/Notes/"))
+#+END_SRC
+
 ** Org mode基本配置
 
 #+BEGIN_SRC emacs-lisp
@@ -416,6 +422,7 @@
   :config
   (prettify-symbols-mode 1)
   :custom
+  (org-modules '(ol-bibtex ol-gnus ol-info ol-eww org-habit org-protocol))
   (org-ellipsis "…")
   (org-fontify-whole-heading-line t)
   (org-fontify-todo-headline t)
@@ -495,7 +502,17 @@
                     :kill-buffer t
                     :jump-to-captured t)))
   :config
-  (setq denote-directory (file-truename "~/Documents/Notes")))
+  (setq denote-directory elliot/org-notes-dir))
+#+END_SRC
+
+** 日程
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-agenda
+  :ensure nil
+  :custom
+  (org-agenda-files
+    (directory-files (expand-file-name "habits" elliot/org-notes-dir) t "habits")))
 #+END_SRC
 
 ** init-org.el 文件尾
