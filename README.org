@@ -631,13 +631,14 @@
 
 #+END_SRC
 
-** magit
+** Version Control
+*** magit
 #+BEGIN_SRC emacs-lisp
 (use-package magit
   :ensure t)
 #+END_SRC
 
-** 側邊欄顯示改動狀態
+*** 側邊欄顯示改動狀態
 #+BEGIN_SRC emacs-lisp
 (use-package diff-hl
   :ensure t
@@ -646,6 +647,26 @@
          (magit-post-refresh . diff-hl-magit-post-refresh))
   :init
   (global-diff-hl-mode t))
+#+END_SRC
+
+** treesit
+
+#+BEGIN_SRC emacs-lisp
+(use-package treesit
+  :ensure nil
+  :defer t
+  :init
+  (setq treesit-font-lock-level 4
+        treesit-language-source-alist
+          '((astro "https://github.com/virchau13/tree-sitter-astro")
+           (css "https://github.com/tree-sitter/tree-sitter-css")
+           (html "https://github.com/tree-sitter/tree-sitter-html")
+           (haskell . ("https://github.com/tree-sitter/tree-sitter-haskell"))
+           (json "https://github.com/tree-sitter/tree-sitter-json")
+           (rust "https://github.com/tree-sitter/tree-sitter-rust")
+           (toml "https://github.com/tree-sitter/tree-sitter-toml")
+           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))))
 #+END_SRC
 
 ** init-dev.el 文件尾
