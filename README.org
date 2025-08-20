@@ -209,6 +209,13 @@
 ;; 空格代替Tab
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+
+;; 啓用行號顯示
+(use-package display-line-numbers
+  :ensure nil
+  :hook (prog-mode . display-line-numbers-mode)
+  :custom
+  (line-number-display-limit large-file-warning-threshold))
 #+END_SRC
 
 ** 編碼設置
