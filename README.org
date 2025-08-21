@@ -386,7 +386,7 @@
 ** 常量
 
 #+BEGIN_SRC emacs-lisp
-(defconst elliot/org-notes-dir (expand-file-name "~/Documents/Notes/"))
+(defconst elliot/org-notes-dir (eval-when-compile (expand-file-name "~/Documents/Notes/")))
 #+END_SRC
 
 ** Org mode基本配置
