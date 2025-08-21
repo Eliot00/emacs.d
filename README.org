@@ -135,7 +135,6 @@
 (setq gc-cons-threshold 16777216)
 #+END_SRC
 
-
 ** init.el 文件尾
 #+BEGIN_SRC emacs-lisp
 
@@ -269,15 +268,6 @@
 
 ;;; Code:
 
-#+END_SRC
-
-** Emacs備份設置
-
-不使用Emacs的自動備份設置。
-
-#+BEGIN_SRC emacs-lisp
-(setq make-backup-files nil)
-(setq auto-save-default nil)
 #+END_SRC
 
 ** 自動重載
