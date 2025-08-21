@@ -209,13 +209,6 @@
 ;; 空格代替Tab
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
-;; 啓用行號顯示
-(use-package display-line-numbers
-  :ensure nil
-  :hook (prog-mode . display-line-numbers-mode)
-  :custom
-  (line-number-display-limit large-file-warning-threshold))
 #+END_SRC
 
 ** 編碼設置
@@ -644,6 +637,18 @@
 
 ;;; Code:
 
+#+END_SRC
+
+** 雜項
+
+#+BEGIN_SRC emacs-lisp
+(use-package elliot-❤️-hack
+  :ensure nil
+  :no-require t
+  :hook ((prog-mode . display-line-numbers-mode) ; 啓用行號顯示
+         (prog-mode . hl-line-mode)) ; 高亮當前行
+  :custom
+  (line-number-display-limit large-file-warning-threshold))
 #+END_SRC
 
 ** Version Control
