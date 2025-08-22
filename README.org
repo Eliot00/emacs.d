@@ -252,12 +252,12 @@
 
 #+END_SRC
 
-** Emacs備份設置
-
-不使用Emacs的自動備份設置。
+** Emacs備份保存設置
 
 #+BEGIN_SRC emacs-lisp
-(setq make-backup-files nil)
+(setq make-backup-files nil) ; 禁用自動備份
+(setq auto-save-default nil) ; 禁用自動保存
+(setq delete-by-moving-to-trash t) ; 移動到廢紙簍替代直接刪除
 #+END_SRC
 
 ** 自動重載
