@@ -81,14 +81,9 @@
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 #+END_SRC
 
-** 安裝[[https://github.com/jwiegley/use-package][use-package]]插件
+** [[https://github.com/jwiegley/use-package][use-package]]
 
 #+begin_src emacs-lisp
-;; 安裝 `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
