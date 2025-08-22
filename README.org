@@ -650,7 +650,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package treesit
   :ensure nil
-  :defer t
+  :mode (("\\.tsx\\'" . tsx-ts-mode)
+         ("\\.ts\\'" . typescript-ts-mode))
   :init
   (setq treesit-font-lock-level 4
         treesit-language-source-alist
