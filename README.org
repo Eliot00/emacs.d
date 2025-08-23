@@ -629,6 +629,10 @@
   :no-require t
   :hook ((prog-mode . display-line-numbers-mode) ; 啓用行號顯示
          (prog-mode . hl-line-mode)) ; 高亮當前行
+  :init
+  (defconst elliot/custom-path "/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin")
+  (setenv "PATH" elliot/custom-path)
+  (setq exec-path (append (parse-colon-path elliot/custom-path) (list exec-directory)))
   :custom
   (line-number-display-limit large-file-warning-threshold))
 #+END_SRC
@@ -671,6 +675,8 @@
            (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
            (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))))
 #+END_SRC
+
+** LSP
 
 ** init-dev.el 文件尾
 #+BEGIN_SRC emacs-lisp
