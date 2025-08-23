@@ -634,7 +634,8 @@
   (setenv "PATH" elliot/custom-path)
   (setq exec-path (append (parse-colon-path elliot/custom-path) (list exec-directory)))
   :custom
-  (line-number-display-limit large-file-warning-threshold))
+  (line-number-display-limit large-file-warning-threshold)
+  (eshell-path-env elliot/custom-path))
 #+END_SRC
 
 ** Version Control
