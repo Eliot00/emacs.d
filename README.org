@@ -428,17 +428,14 @@
 
 #+BEGIN_SRC emacs-lisp
 ;; 中文字體等寬字體設置
-(defun my/org-mono-font ()
+(defun elliot/setup-org-mono-font ()
   (face-remap-add-relative 'fixed-pitch '(:family "LXGW WenKai Mono TC"))
-  (variable-pitch-mode))
+  (variable-pitch-mode t))
 
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
-  :hook ((org-mode . my/org-mono-font))
-  :commands (org-find-exact-headline-in-buffer org-set-tags)
-  :config
-  (prettify-symbols-mode 1)
+  :hook ((org-mode . elliot/setup-org-mono-font))
   :custom
   (org-modules '(ol-bibtex ol-gnus ol-info ol-eww org-habit org-protocol))
   (org-ellipsis "…")
