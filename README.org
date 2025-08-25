@@ -101,6 +101,7 @@
 ;; 加載各模塊配置
 ;; 不要在`*message*'緩衝區顯示加載模塊化配置的信息
 (with-temp-message ""
+  (require 'init-base)
   (require 'init-ui)
   (require 'init-edit)
   (require 'init-org)
@@ -118,13 +119,41 @@
 (setq gc-cons-threshold 16777216)
 #+END_SRC
 
-
 ** init.el 文件尾
 #+BEGIN_SRC emacs-lisp
 
 (provide 'init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
+#+END_SRC
+
+* init-base.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-base.el :mkdirp yes
+:END:
+
+** init-base.el 文件头
+#+BEGIN_SRC emacs-lisp
+;;; init-base.el --- Basical settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** 簡化確認操作
+
+#+BEGIN_SRC emacs-lisp
+(setq use-short-answers t)
+#+END_SRC
+
+** init-base.el 文件尾
+
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-base)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-base.el ends here
 #+END_SRC
 
 * init-ui.el
