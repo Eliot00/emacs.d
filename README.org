@@ -106,7 +106,8 @@
   (require 'init-edit)
   (require 'init-org)
   (require 'init-completion)
-  (require 'init-dev))
+  (require 'init-dev)
+  (require 'init-llm))
 #+END_SRC
 
 ** 性能相關 - 重置
@@ -712,4 +713,40 @@
 (provide 'init-dev)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-dev.el ends here
+#+END_SRC
+
+* init-llm.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-llm.el :mkdirp yes
+:END:
+
+** init-llm.el 文件头
+#+BEGIN_SRC emacs-lisp
+;;; init-llm.el --- LLM settings -*- lexical-binding: t -*-
+;;; Commentary:
+
+;;; Code:
+
+#+END_SRC
+
+** gptel
+
+#+BEGIN_SRC emacs-lisp
+(use-package gptel
+  :ensure t
+  :defer t
+  :config
+  (gptel-make-deepseek
+    "DeepSeek"
+    :stream t
+    :key gptel-api-key))
+#+END_SRC
+
+** init-llm.el 文件尾
+
+#+BEGIN_SRC emacs-lisp
+
+(provide 'init-llm)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-llm.el ends here
 #+END_SRC
