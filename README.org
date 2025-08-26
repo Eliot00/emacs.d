@@ -72,15 +72,6 @@
 (setq file-name-handler-alist nil)
 #+END_SRC
 
-** package包管理配置
-#+BEGIN_SRC emacs-lisp
-(require 'package)
-(setq package-archives
-      '(("melpa"  . "https://melpa.org/packages/")
-        ("gnu"    . "https://elpa.gnu.org/packages/")
-        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-#+END_SRC
-
 ** [[https://github.com/jwiegley/use-package][use-package]]
 
 #+begin_src emacs-lisp
