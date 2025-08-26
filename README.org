@@ -244,6 +244,7 @@
 #+BEGIN_SRC emacs-lisp
 (use-package nerd-icons
   :ensure t
+  :defer t
   :custom
   (nerd-icons-font-family "Maple Mono NF"))
 #+END_SRC
