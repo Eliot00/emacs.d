@@ -609,6 +609,14 @@
   (setq savehist-autosave-interval 300))
 #+END_SRC
 
+** marginalia
+
+#+BEGIN_SRC emacs-lisp
+(use-package marginalia
+  :ensure t
+  :hook (after-init . marginalia-mode))
+#+END_SRC
+
 ** init-completion.el 文件尾
 #+BEGIN_SRC emacs-lisp
 
