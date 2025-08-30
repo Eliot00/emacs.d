@@ -510,9 +510,12 @@
 #+BEGIN_SRC emacs-lisp
 (use-package org-agenda
   :ensure nil
+  :defer t
   :custom
   (org-agenda-files
-    (directory-files (expand-file-name "habits" elliot/org-notes-dir) t "habits")))
+    (append
+      (directory-files (expand-file-name "habits/" elliot/org-notes-dir) t "\\.org$")
+      (directory-files (expand-file-name "projects/" elliot/org-notes-dir) t "\\.org$"))))
 #+END_SRC
 
 ** init-org.el 文件尾
