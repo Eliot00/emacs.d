@@ -645,6 +645,7 @@
 (use-package elliot-❤️-hack
   :ensure nil
   :no-require t
+  :hook ((prog-mode . hs-minor-mode))
   :init
   (defconst elliot/custom-path "/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin")
   (setenv "PATH" elliot/custom-path)
