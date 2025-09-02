@@ -681,8 +681,7 @@
 (use-package treesit
   :ensure nil
   :mode (("\\.tsx\\'" . tsx-ts-mode)
-         ("\\.ts\\'"  . typescript-ts-mode)
-         ("\\.rs\\'"  . rust-ts-mode))
+         ("\\.ts\\'"  . typescript-ts-mode))
   :init
   (setq treesit-font-lock-level 4
         treesit-language-source-alist
@@ -705,6 +704,16 @@
   :defer t
   :custom
   (eglot-code-action-indications '(eldoc-hint)))
+#+END_SRC
+
+** 语言
+*** Rust
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'"
+  :init
+  (setq rust-mode-treesitter-derive t))
 #+END_SRC
 
 ** init-dev.el 文件尾
