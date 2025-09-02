@@ -681,7 +681,8 @@
 (use-package treesit
   :ensure nil
   :mode (("\\.tsx\\'" . tsx-ts-mode)
-         ("\\.ts\\'" . typescript-ts-mode))
+         ("\\.ts\\'"  . typescript-ts-mode)
+         ("\\.rs\\'"  . rust-ts-mode))
   :init
   (setq treesit-font-lock-level 4
         treesit-language-source-alist
@@ -690,7 +691,7 @@
             (html       "https://github.com/tree-sitter/tree-sitter-html")
             (haskell    "https://github.com/tree-sitter/tree-sitter-haskell")
             (json       "https://github.com/tree-sitter/tree-sitter-json")
-            (rust       "https://github.com/tree-sitter/tree-sitter-rust")
+            (rust       "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.2") ; for ABI compability
             (toml       "https://github.com/tree-sitter/tree-sitter-toml")
             (tsx        "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
             (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))))
