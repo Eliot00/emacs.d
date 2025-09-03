@@ -702,6 +702,9 @@
 (use-package eglot
   :ensure nil
   :defer t
+  :bind (:map flymake-mode-map
+         ("M-n" . flymake-goto-next-error)
+         ("M-p" . flymake-goto-prev-error))
   :custom
   (eglot-code-action-indications '(eldoc-hint)))
 #+END_SRC
