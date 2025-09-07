@@ -250,7 +250,7 @@
   :ensure t
   :custom
   (indent-bars-treesit-support t)
-  :hook ((typescript-ts-mode tsx-ts-mode rust-mode) . indent-bars-mode))
+  :hook ((typescript-ts-mode rust-mode) . indent-bars-mode))
 #+END_SRC
 
 ** init-ui.el 文件尾
