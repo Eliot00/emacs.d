@@ -244,6 +244,15 @@
   (doom-modeline-github nil))
 #+END_SRC
 
+** 縮進提示
+#+BEGIN_SRC emacs-lisp
+(use-package indent-bars
+  :ensure t
+  :custom
+  (indent-bars-treesit-support t)
+  :hook ((typescript-ts-mode rust-mode) . indent-bars-mode))
+#+END_SRC
+
 ** init-ui.el 文件尾
 #+BEGIN_SRC emacs-lisp
 
