@@ -671,7 +671,8 @@
 *** magit
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-  :ensure t)
+  :ensure t
+  :defer t)
 #+END_SRC
 
 *** 側邊欄顯示改動狀態
