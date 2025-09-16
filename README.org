@@ -189,9 +189,13 @@
 ** 字體
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default nil :family "Maple Mono NF" :height 180)
-(set-fontset-font t '(#x2ff0 . #x9ffc) (font-spec :family "LXGW WenKai TC"))
+(set-fontset-font t 'unicode (font-spec :family "Maple Mono NF"))
+(set-fontset-font t 'han (font-spec :family "LXGW WenKai Mono TC"))
+(set-fontset-font t 'kana (font-spec :family "LXGW WenKai Mono TC"))
+(set-fontset-font t 'cjk-misc (font-spec :family "LXGW WenKai Mono TC"))
+(set-fontset-font t 'bopomofo (font-spec :family "LXGW WenKai Mono TC"))
 (set-face-attribute 'variable-pitch nil :family "LXGW WenKai TC")
-(set-face-attribute 'fixed-pitch nil :family "Maple Mono NF")
+(set-face-attribute 'fixed-pitch nil :family "LXGW WenKai Mono TC")
 #+END_SRC
 
 ** 零散設置
@@ -420,15 +424,10 @@
 ** Org mode基本配置
 
 #+BEGIN_SRC emacs-lisp
-;; 中文字體等寬字體設置
-(defun elliot/setup-org-mono-font ()
-  (face-remap-add-relative 'fixed-pitch '(:family "LXGW WenKai Mono TC"))
-  (variable-pitch-mode t))
-
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
-  :hook ((org-mode . elliot/setup-org-mono-font))
+  :hook ((org-mode . variable-pitch-mode))
   :custom
   (org-modules '(ol-bibtex ol-gnus ol-info ol-eww org-habit org-protocol))
   (org-ellipsis "…")
