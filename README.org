@@ -572,7 +572,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package corfu
   :ensure t
-  :hook (after-init . global-corfu-mode)
+  :hook ((after-init . global-corfu-mode)
+         (prog-mode . corfu-popupinfo-mode))
   :config
   (setq tab-always-indent 'complete)
   (setq text-mode-ispell-word-completion nil)
