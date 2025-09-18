@@ -39,9 +39,6 @@
 ;; 啓用 `quickstart'
 (setq package-quickstart t)
 
-;; Prevent flash of unstyled mode line
-(setq mode-line-format nil)
-
 (provide 'early-init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; early-init.el ends here
