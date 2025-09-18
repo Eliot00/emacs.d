@@ -172,15 +172,13 @@
 
 ** 字體
 #+BEGIN_SRC emacs-lisp
-(set-fontset-font "fontset-startup" 'unicode (font-spec :family "Maple Mono NF CN"))
-(set-face-attribute 'default nil :height 180)
+(let ((iosevka (font-spec :family "Iosevka Nerd Font"))
+      (lxgw    (font-spec :family "LXGW WenKai Mono TC")))
+  (set-fontset-font t 'unicode iosevka)
+  (set-fontset-font t 'han lxgw)
+  (set-fontset-font t 'cjk-misc lxgw)
+  (set-face-attribute 'default nil :font "fontset-default" :height 200))
 (set-face-attribute 'fixed-pitch nil :inherit 'default)
-(create-fontset-from-fontset-spec
-  (font-xlfd-name
-    (font-spec :family "LXGW WenKai Mono TC"
-               :registry "fontset-cn")))
-(set-fontset-font "fontset-cn" 'unicode (font-spec :family "LXGW WenKai Mono TC"))
-(set-face-attribute 'variable-pitch nil :fontset "fontset-cn")
 #+END_SRC
 
 ** 主題
@@ -188,7 +186,6 @@
 (use-package modus-themes
   :ensure t
   :custom
-  (modus-themes-mixed-fonts t)
   (modus-themes-headings
   '((0 . (1.75))
     (1 . (1.2))
@@ -234,7 +231,7 @@
   :ensure t
   :defer t
   :custom
-  (nerd-icons-font-family "Maple Mono NF CN"))
+  (nerd-icons-font-family "Iosevka Nerd Font"))
 #+END_SRC
 ** Modeline
 #+BEGIN_SRC emacs-lisp
@@ -428,7 +425,6 @@
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
-  :hook ((org-mode . variable-pitch-mode))
   :custom
   (org-modules '(ol-bibtex ol-gnus ol-info ol-eww org-habit org-protocol))
   (org-ellipsis "…")
