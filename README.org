@@ -655,12 +655,15 @@
   :ensure nil
   :no-require t
   :hook ((prog-mode . hs-minor-mode)
+         (prog-mode . display-line-numbers-mode)
          (prog-mode . electric-pair-mode))
   :init
   (defconst elliot/custom-path "/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin")
   (setenv "PATH" elliot/custom-path)
   (setq exec-path (append (parse-colon-path elliot/custom-path) (list exec-directory)))
   :custom
+  (display-line-numbers-width-start t)
+  (display-line-number-grow-only t)
   (eshell-path-env elliot/custom-path))
 #+END_SRC
 
