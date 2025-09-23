@@ -627,7 +627,8 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-pcm-leading-wildcard t))
 #+END_SRC
 
 ** corfu
@@ -644,10 +645,10 @@
         ("TAB" . corfu-next)
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
-        ([backtab] . corfu-previous))
+        ([backtab] . corfu-previous)
+        ("S-SPC" . corfu-insert-separator))
   :custom
   (corfu-auto t)
-  (corfu-quit-no-match 'separator)
   (corfu-cycle t))
 #+END_SRC
 
