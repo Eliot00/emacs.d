@@ -18,20 +18,17 @@
 ;; 設置垃圾回收參數
 (setq gc-cons-threshold most-positive-fixnum)
 
+;; 禁止自動縮放窗口
+(setq frame-inhibit-implied-resize t)
+
 ;; 禁用菜單欄、工具欄、滾動條
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 
 ;; 沉浸式titlebar
-(push '(ns-transparent-titlebar . t) default-frame-alist)
-
-;; 禁止自動縮放窗口
-(setq frame-inhibit-implied-resize t)
-
-;; 禁止啓動屏幕和對話框
-(setq inhibit-splash-screen t)
-(setq use-file-dialog nil)
+(when (featurep 'ns)
+  (push '(ns-transparent-titlebar . t) default-frame-alist))
 
 ;; macOS按鍵配置
 (setq mac-command-modifier 'meta)
@@ -276,6 +273,7 @@
   :custom
   (nerd-icons-font-family "Iosevka Nerd Font"))
 #+END_SRC
+
 ** Modeline
 #+BEGIN_SRC emacs-lisp
 (use-package doom-modeline
@@ -296,6 +294,17 @@
   :custom
   (indent-bars-treesit-support t)
   :hook ((typescript-ts-mode rust-mode) . indent-bars-mode))
+#+END_SRC
+
+** 啓動畫面
+
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :ensure t
+  :vc (:url "https://github.com/emacs-dashboard/emacs-dashboard.git"
+       :rev :newest)
+  :config
+  (dashboard-setup-startup-hook))
 #+END_SRC
 
 ** init-ui.el 文件尾
