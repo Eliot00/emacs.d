@@ -226,6 +226,8 @@
 (use-package modus-themes
   :ensure t
   :custom
+  (modus-themes-bold-constructs t)
+  (modus-themes-italic-constructs t)
   (modus-themes-headings
   '((0 . (1.75))
     (1 . (1.2))
