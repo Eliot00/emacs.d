@@ -308,6 +308,7 @@
   :init
   (setq dashboard-display-icons-p t
         dashboard-icon-type 'nerd-icons
+        dashboard-set-file-icons t
         dashboard-projects-backend 'project-el
         dashboard-items '((recents   . 5)
                           (bookmarks . 5)
