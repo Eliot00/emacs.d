@@ -75,6 +75,12 @@
 ** [[https://github.com/jwiegley/use-package][use-package]]
 
 #+begin_src emacs-lisp
+;; 部分包需要從melpa下載
+(eval-when-compile
+  (require 'package))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+;; 初始化 `use-package'
 (setq use-package-expand-minimally t
       use-package-enable-imenu-support t)
 (eval-when-compile
