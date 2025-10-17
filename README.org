@@ -814,6 +814,7 @@
 (use-package geiser-guile
   :ensure t
   :defer t
+  :config
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((scheme . t))))
