@@ -809,6 +809,16 @@
   (setq rust-mode-treesitter-derive t))
 #+END_SRC
 
+*** Scheme
+#+BEGIN_SRC emacs-lisp
+(use-package geiser-guile
+  :ensure t
+  :defer t
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((scheme . t))))
+#+END_SRC
+
 ** init-dev.el 文件尾
 #+BEGIN_SRC emacs-lisp
 
