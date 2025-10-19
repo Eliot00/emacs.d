@@ -520,7 +520,8 @@
   (org-log-reschedule 'note)
   (org-log-into-drawer t)
   (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "PENDING(p!)" "|" "DONE(d!)" "CANCELLED(c@/!)")))
-  (org-return-follows-link t))
+  (org-return-follows-link t)
+  (org-edit-src-content-indentation 0))
 #+END_SRC
 
 | 表格測試 | Test |

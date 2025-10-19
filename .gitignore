@@ -21,3 +21,4 @@ early-init.el
 /.cache
 package-quickstart.el
 package-quickstart.elc
+tramp
