@@ -800,6 +800,17 @@
   (eglot-code-action-indications '(eldoc-hint)))
 #+END_SRC
 
+將診斷信息顯示在sideline
+
+#+BEGIN_SRC emacs-lisp
+(use-package sideline-flymake
+  :ensure t
+  :hook (flymake-mode . sideline-mode)
+  :init
+  (setq sideline-flymake-display-mode 'point)
+  (setq sideline-backends-right '(sideline-flymake)))
+#+END_SRC
+
 ** 语言
 *** Rust
 #+BEGIN_SRC emacs-lisp
